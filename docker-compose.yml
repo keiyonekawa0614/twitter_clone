@@ -1,0 +1,30 @@
+version: "2"
+services:
+  jupiter_web:
+    build: ./web
+    container_name: twitter_web
+    ports:
+      - "32776:80"
+    depends_on:
+      - twitter_db
+    links:
+      - twitter_db
+    volumes:
+      - ./SampleLaravel:/var/www/sampleLaravel
+    #restart: always
+
+  twitter_db:
+    build: ./db
+    container_name: twitter_db
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: twitter
+      #MYSQL_USER: jupiter
+      #MYSQL_PASSWORD: jupiter
+      MYSQL_HOST: "localhost"
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    #restart: always

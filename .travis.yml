@@ -1,0 +1,35 @@
+sudo: required
+language: php
+dist: trusty
+
+php:
+  - '7.0'
+  - '7.1'
+
+services:
+  - mysql
+  - memcached
+
+before_script:
+  #- sudo apt-get update
+  #- sudo apt-get install php-pear
+  #- sudo apt-get install php-memcached memcached
+  #- sudo pecl channel-update pecl.php.net
+  #- sudo pecl install memcached
+  - echo "extension=memcached.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - cd jupiter
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar install --dev --prefer-source
+  - cp .env.vagrant .env
+  - mysql -e 'create database jupiter;'
+  - composer install --no-interaction
+  - php artisan key:generate
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - ./vendor/laravel/dusk/bin/chromedriver-linux &
+  - cp .env.testing .env
+  - php artisan serve &
+
+script:
+  - ./vendor/bin/phpunit
+  #- php artisan dusk
