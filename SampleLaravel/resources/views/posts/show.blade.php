@@ -31,4 +31,5 @@
 <div id="post-body">
     {{ $post->body }}
 </div>
+
 @endsection

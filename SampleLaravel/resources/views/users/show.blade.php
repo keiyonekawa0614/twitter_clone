@@ -25,4 +25,5 @@
     <dt class="col-md-2">{{ __('Email') }}</dt>
     <dd class="col-md-10">{{ $user->email }}</dd>
 </dl>
+
 @endsection

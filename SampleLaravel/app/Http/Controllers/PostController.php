@@ -42,8 +42,10 @@ class PostController extends Controller
       $post->body = $request->body;
       $id = Auth::id();
       $post->user_id = $id;
+      $name = Auth::user()->name;
+      $post->user_name = $name;
       $post->save();
-      return redirect('posts/'.$post->id);
+      return redirect('/posts');
     }
 
     /**

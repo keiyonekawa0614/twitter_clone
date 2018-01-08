@@ -8,6 +8,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th>{{ __('Author') }}</th>
                 <th>{{ __('Title') }}</th>
                 <th>{{ __('Body') }}</th>
                 <th>{{ __('Created') }}</th>
@@ -17,6 +18,9 @@
         <tbody>
         @foreach ($posts as $post)
             <tr>
+                <td>
+                   {{ $post->user_name }}
+               </td>
                 <td>
                     <a href="{{ url('posts/'.$post->id) }}">{{ $post->title }}</a>
                 </td>

@@ -18,7 +18,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <!-- アプリ名 -->
-            <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name') }}</a>
+            <a class="navbar-brand" href="{{ url('/') }}">Twiiter_clone</a>
 
             <!-- モバイル画面用のメニュー開閉ボタン -->
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,26 +26,9 @@
             </button>
 
             <!-- メニュー項目 -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- 左詰め -->
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('posts') }}">{{ __('Posts') }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('users') }}">{{ __('Users') }}</a>
-                    </li>
-                </ul>
-                <!-- 右詰め (上で .mr-auto を指定しているため) -->
-                <ul class="navbar-nav my-2 my-lg-0">
-
-                    <!-- 投稿ボタン -->
-                    <li class="nav-item">
-                        <a href="{{ url('posts/create') }}" id="new-post" class="btn btn-success">
-                            {{ __('New Post') }}
-                        </a>
-                    </li>
-
+            <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
+                <!-- 右詰め -->
+                <ul class="navbar-nav my-2 my-lg-0s">
                     <!-- ログイン・ログアウト -->
                     @guest
                         <li class="nav-item">
@@ -55,6 +38,12 @@
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @else
+                    <!-- ツイート投稿ボタン -->
+                       <li class="nav-item">
+                          <a href="{{ url('posts/create') }}" id="new-post" class="btn btn-success">
+                              {{ __('ツイート') }}
+                           </a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
@@ -62,6 +51,9 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
                                 <a class="dropdown-item" href="{{ url('users/'.auth()->user()->id) }}">
                                     {{ __('Profile') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ url('users') }}">
+                                    {{ __('Users') }}
                                 </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
