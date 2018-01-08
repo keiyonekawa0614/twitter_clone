@@ -9,7 +9,6 @@
         <thead>
             <tr>
                 <th>{{ __('Author') }}</th>
-                <th>{{ __('Title') }}</th>
                 <th>{{ __('Body') }}</th>
                 <th>{{ __('Created') }}</th>
                 <th>{{ __('Updated') }}</th>
@@ -18,13 +17,8 @@
         <tbody>
         @foreach ($posts as $post)
             <tr>
-                <td>
-                   {{ $post->user_name }}
-               </td>
-                <td>
-                    <a href="{{ url('posts/'.$post->id) }}">{{ $post->title }}</a>
-                </td>
-                <td>{{ $post->body }}</td>
+                <td>{{ $post->user_name }}</td>
+                <td><a href="{{ url('posts/'.$post->id) }}">{{ $post->body }}</a></td>
                 <td>{{ $post->created_at }}</td>
                 <td>{{ $post->updated_at }}</td>
              </tr>
