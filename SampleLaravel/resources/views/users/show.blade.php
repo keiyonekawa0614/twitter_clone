@@ -2,6 +2,7 @@
     $title = __('User') . ': ' . $user->name;
     $userName = Auth::user()->name;
     $name = $user->name;
+
 @endphp
 @extends('layouts.my')
 @section('content')
@@ -20,7 +21,7 @@
     <a href="{{ url('follows/'.$user->id.'/edit') }}" class="btn btn-primary">
         {{ __('フォローする') }}
     </a>
-    <a href="{{ url('followers/'.$user->id.'/edit') }}" class="btn btn-danger">
+    <a href="{{ url('follows/'.$user->id) }}" class="btn btn-danger">
         {{ __('フォロー解除') }}
     </a>
     @endif
@@ -35,5 +36,31 @@
     <dt class="col-md-2">{{ __('Email') }}</dt>
     <dd class="col-md-10">{{ $user->email }}</dd>
 </dl>
+
+<hr>
+
+<h1>Posts</h1>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{{ __('Author') }}</th>
+                <th>{{ __('Body') }}</th>
+                <th>{{ __('Created') }}</th>
+                <th>{{ __('Updated') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach ($posts as $post)
+            <tr>
+                <td>{{ $post->user_name }}</td>
+                <td><a href="{{ url('posts/'.$post->id) }}">{{ $post->body }}</a></td>
+                <td>{{ $post->created_at }}</td>
+                <td>{{ $post->updated_at }}</td>
+             </tr>
+        @endforeach
+        </tbody>
+    </table>
+</div>
 
 @endsection

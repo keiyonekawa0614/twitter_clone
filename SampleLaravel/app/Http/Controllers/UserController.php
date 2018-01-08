@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Post;
 
 class UserController extends Controller
 {
@@ -52,7 +55,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', ['user' => $user]);
+        $id = Auth::id();
+        $followIdArray = DB::select('select follows.follow_id from follows where user_id = ?', [$id]);
+        #$key = in_array($user->id, $followIdArray);
+        $posts = DB::select('select * from posts where user_id = ? order by created_at desc', [$user->id]);
+        return view('users.show', ['user' => $user,'posts' => $posts, 'array_followId' => $followIdArray]);
     }
 
     /**
@@ -63,6 +70,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+
       return view('users.edit', ['user' => $user]);
 
     }
