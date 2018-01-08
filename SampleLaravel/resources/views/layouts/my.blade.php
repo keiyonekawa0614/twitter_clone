@@ -18,7 +18,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <!-- アプリ名 -->
-            <a class="navbar-brand" href="{{ url('/') }}">Twiiter_clone</a>
+            <a class="navbar-brand" href="{{ url('/posts') }}">Twiiter_clone</a>
 
             <!-- モバイル画面用のメニュー開閉ボタン -->
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

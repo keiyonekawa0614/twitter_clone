@@ -1,5 +1,7 @@
 @php
     $title = __('User') . ': ' . $user->name;
+    $userName = Auth::user()->name;
+    $name = $user->name;
 @endphp
 @extends('layouts.my')
 @section('content')
@@ -7,13 +9,21 @@
 
 <!-- 編集・削除ボタン -->
 <div>
+    @if($userName == $name)
     <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary">
         {{ __('Edit') }}
     </a>
-    <!-- 削除ボタンは後で正式なものに置き換えます -->
-    <a href="#" class="btn btn-danger">
+    <!--  <a href="#" class="btn btn-danger">
         {{ __('Delete') }}
+    </a> -->
+    @else
+    <a href="{{ url('follows/'.$user->id.'/edit') }}" class="btn btn-primary">
+        {{ __('フォローする') }}
     </a>
+    <a href="{{ url('followers/'.$user->id.'/edit') }}" class="btn btn-danger">
+        {{ __('フォロー解除') }}
+    </a>
+    @endif
 </div>
 
 <!-- ユーザー1件の情報 -->

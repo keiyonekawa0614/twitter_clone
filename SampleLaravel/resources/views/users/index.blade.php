@@ -18,6 +18,7 @@
                     <td>{{ $user->id }}</td>
                     <td><a href="{{ url('users/'.$user->id) }}">{{ $user->name }}</a></td>
                 </tr>
+
             @endforeach
         </tbody>
     </table>

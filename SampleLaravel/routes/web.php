@@ -19,3 +19,7 @@ Auth::routes();
 Route::resource('users', 'UserController');
 
 Route::resource('posts', 'PostController');
+
+Route::resource('follows', 'FollowController');
+
+Route::resource('followers', 'FollowerController');
