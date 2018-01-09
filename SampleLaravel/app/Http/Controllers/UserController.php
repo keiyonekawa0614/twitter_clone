@@ -18,7 +18,9 @@ class UserController extends Controller
     public function index()
     {
       $users = User::all();
-      return view('users.index', ['users' => $users]);
+      $id = Auth::id();
+      $array_follow_id = DB::select('select follows.follow_id from follows where user_id = ?', [$id]);
+      return view('users.index', ['users' => $users, 'array_follow_id' =>$array_follow_id]);
     }
 
     /**
@@ -86,6 +88,10 @@ class UserController extends Controller
     {
       $user->name = $request->name;
       $user->save();
+
+      $userName = $request->name;
+      $userId = $user->id;
+      DB::update('update posts set user_name = ? where user_id = ?', [$userName, $userId]);
       return redirect('users/'.$user->id);
     }
 

@@ -11,7 +11,6 @@
                 <th>{{ __('Author') }}</th>
                 <th>{{ __('Body') }}</th>
                 <th>{{ __('Created') }}</th>
-                <th>{{ __('Updated') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -20,7 +19,6 @@
                 <td>{{ $post->user_name }}</td>
                 <td><a href="{{ url('posts/'.$post->id) }}">{{ $post->body }}</a></td>
                 <td>{{ $post->created_at }}</td>
-                <td>{{ $post->updated_at }}</td>
              </tr>
         @endforeach
         </tbody>

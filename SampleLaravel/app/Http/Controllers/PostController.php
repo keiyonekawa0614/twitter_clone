@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,20 +14,28 @@ class PostController extends Controller
     {
       $this->middleware('auth')->except(['index', 'show']);
     }
-    
+
     /**
-     * Display a listing of the resource.
+     * ツイート一覧画面を表示する
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-      $posts = Post::latest()->get();
-      return view('posts.index', ['posts' => $posts]);
+      if (Auth::check()) {
+        // ログインしている場合、ツイート一覧画面を表示する
+        $id = Auth::id();
+        // 自身のツイートとフォローしているユーザーのツイートを取得する
+        $posts = DB::select('select distinct posts.id, posts.user_id, posts.user_name, posts.body, posts.created_at from posts left outer join follows on posts.user_id = follows.follow_id where follows.user_id = ? or posts.user_id = ? order by posts.created_at desc', [$id, $id]);
+        return view('posts.index', ['posts' => $posts]);
+      } else {
+        // ログインしていない場合、ログインページにリダイレクトする
+        return redirect('/login');
+      }
     }
 
     /**
-     * Show the form for creating a new resource.
+     * ツイート投稿画面を表示する
      *
      * @return \Illuminate\Http\Response
      */
@@ -36,7 +45,7 @@ class PostController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * ツイートをDBに登録する
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
