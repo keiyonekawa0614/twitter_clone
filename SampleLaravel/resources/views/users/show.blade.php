@@ -18,12 +18,18 @@
         {{ __('Delete') }}
     </a> -->
     @else
-    <a href="{{ url('follows/'.$user->id.'/edit') }}" class="btn btn-primary">
-        {{ __('フォローする') }}
-    </a>
-    <a href="{{ url('follows/'.$user->id) }}" class="btn btn-danger">
-        {{ __('フォロー解除') }}
-    </a>
+    @php
+    $key = in_array($user->id, $array_follow_id);
+    @endphp
+  　  @if($key)
+        <a href="{{ url('follows/'.$user->id) }}" class="btn btn-danger">
+          {{ __('フォロー解除') }}
+        </a>
+  　  @else
+        <a href="{{ url('follows/'.$user->id.'/edit') }}" class="btn btn-primary">
+          {{ __('フォローする') }}
+        </a>
+    　@endif
     @endif
 </div>
 

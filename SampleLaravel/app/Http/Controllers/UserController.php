@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Post;
+use App\Follow;
 
 class UserController extends Controller
 {
@@ -19,7 +20,8 @@ class UserController extends Controller
     {
       $users = User::all();
       $id = Auth::id();
-      $array_follow_id = DB::select('select follows.follow_id from follows where user_id = ?', [$id]);
+      $follow_id = Follow::where('user_id','=',$id)->get(['follow_id']);
+      $array_follow_id = array_column($follow_id->toArray(), 'follow_id');
       return view('users.index', ['users' => $users, 'array_follow_id' =>$array_follow_id]);
     }
 
@@ -58,10 +60,10 @@ class UserController extends Controller
     public function show(User $user)
     {
         $id = Auth::id();
-        $followIdArray = DB::select('select follows.follow_id from follows where user_id = ?', [$id]);
-        #$key = in_array($user->id, $followIdArray);
+        $follow_id = Follow::where('user_id','=',$id)->get(['follow_id']);
+        $array_follow_id = array_column($follow_id->toArray(), 'follow_id');
         $posts = DB::select('select * from posts where user_id = ? order by created_at desc', [$user->id]);
-        return view('users.show', ['user' => $user,'posts' => $posts, 'array_followId' => $followIdArray]);
+        return view('users.show', ['user' => $user,'posts' => $posts, 'array_follow_id' => $array_follow_id]);
     }
 
     /**

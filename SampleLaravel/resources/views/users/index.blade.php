@@ -22,19 +22,15 @@
                     <td>
                       @if(Auth::user()->name != $user->name)
                       @php
-                      $key = array_search($user->id, array(1,2,3), /*$strict=*/ true);
-                      var_dump($user->id);
-                      print_r(array(1,2,3));
-                      print_r($array_follow_id);
-                      var_dump($key);
+                      $key = in_array($user->id, $array_follow_id);
                       @endphp
                         @if($key)
-                        <a href="{{ url('follows/'.$user->id.'/edit') }}" class="btn btn-primary">
-                            {{ __('フォローする') }}
-                        </a>
-                        @else
                         <a href="{{ url('follows/'.$user->id) }}" class="btn btn-danger">
                             {{ __('フォロー解除') }}
+                        </a>
+                        @else
+                        <a href="{{ url('follows/'.$user->id.'/edit') }}" class="btn btn-primary">
+                            {{ __('フォローする') }}
                         </a>
                         @endif
                       @endif
