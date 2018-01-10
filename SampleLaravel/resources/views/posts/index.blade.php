@@ -5,23 +5,18 @@
 @section('content')
 <h1>{{ $title }}</h1>
 <div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>{{ __('Author') }}</th>
-                <th>{{ __('Body') }}</th>
-                <th>{{ __('Created') }}</th>
-            </tr>
-        </thead>
-        <tbody>
         @foreach ($posts as $post)
-            <tr>
-                <td>{{ $post->user_name }}</td>
-                <td><a href="{{ url('posts/'.$post->id) }}">{{ $post->body }}</a></td>
-                <td>{{ $post->created_at }}</td>
-             </tr>
+        <div class="card">
+              <div class="card-header">
+                {{ $post->user_name }}
+              </div>
+              <div class="card-body" style="padding-bottom: 0px;">
+                <a href="{{ url('posts/'.$post->id) }}">
+                <p>{{ $post->body }}</p>
+                </a>
+                  <small class="text-muted">{{ $post->created_at }}</small>
+                <hr>
+          </div>
         @endforeach
-        </tbody>
-    </table>
 </div>
 @endsection
