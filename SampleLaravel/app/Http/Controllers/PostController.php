@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class PostController extends Controller
 {
@@ -23,11 +24,12 @@ class PostController extends Controller
     public function index()
     {
       if (Auth::check()) {
+        $postdata = Session::get('_old_input');
         // ログインしている場合、ツイート一覧画面を表示する
         $id = Auth::id();
         // 自身のツイートとフォローしているユーザーのツイートを取得する
         $posts = DB::select('select distinct posts.id, posts.user_id, posts.user_name, posts.body, posts.created_at from posts left outer join follows on posts.user_id = follows.follow_id where follows.user_id = ? or posts.user_id = ? order by posts.created_at desc', [$id, $id]);
-        return view('posts.index', ['posts' => $posts]);
+        return view('posts.index', ['posts' => $posts, 'postdata'=>$postdata]);
       } else {
         // ログインしていない場合、ログインページにリダイレクトする
         return redirect('/login');
@@ -59,7 +61,7 @@ class PostController extends Controller
       $name = Auth::user()->name;
       $post->user_name = $name;
       $post->save();
-      return redirect('/posts');
+      return redirect('/posts')->withInput();
     }
 
     /**

@@ -2,7 +2,6 @@
     $title = __('User') . ': ' . $user->name;
     $userName = Auth::user()->name;
     $name = $user->name;
-
 @endphp
 @extends('layouts.my')
 @section('content')
@@ -44,23 +43,46 @@
 </dl>
 
 <hr>
-
-<h1>Posts</h1>
 <div class="table-responsive">
-        @foreach ($posts as $post)
-        <div class="card">
-              <div class="card-header">
-                {{ $post->user_name }}
-              </div>
-              <div class="card-body" style="padding-bottom: 0px;">
-                <a href="{{ url('posts/'.$post->id) }}">
-                <p>{!! nl2br(e( $post->body )) !!}</p>
-                </a>
-                  <small class="text-muted">{{ $post->created_at }}</small>
-                <hr>
+  <div class="container">
+  <div class="row" style="margin-right: -195px;margin-left: 195px;">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-body" style="padding: 15px;">
+          <div class="table-container">
+
+              <table class="table table-filter">
+                <tbody>
+                  @foreach ($posts as $post)
+                  <tr data-status="pagado">
+                    <td>
+                      <a style="text-decoration: none;color: black;" href="{{ url('posts/'.$post->id) }}">
+                      <div class="media">
+                        <a href="#" style="padding-right: 10px;float: left!important;">
+                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                        </a>
+                        <div class="media-body">
+                          <a style="text-decoration: none;color: black;" href="{{ url('posts/'.$post->id) }}">
+                          <span style="float: right!important;" class="media-meta">{{ $post->created_at }}</span>
+                          <h4 class="title">
+                            {{ $post->user_name }}
+                            <span style="float: right!important;" class="pagado">{{ $post->user_name }}</span>
+                          </h4>
+                          <p class="summary">{!! nl2br(e( $post->body )) !!}</p>
+                        </div>
+                      </div>
+                      </a>
+                    </td>
+                  </tr>
+                @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-        @endforeach
+      </div>
+  </div>
+  </div>
 </div>
 
 @endsection
