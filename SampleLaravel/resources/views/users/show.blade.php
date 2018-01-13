@@ -54,7 +54,7 @@
               </div>
               <div class="card-body" style="padding-bottom: 0px;">
                 <a href="{{ url('posts/'.$post->id) }}">
-                <p>{{ $post->body }}</p>
+                <p>{!! nl2br(e( $post->body )) !!}</p>
                 </a>
                   <small class="text-muted">{{ $post->created_at }}</small>
                 <hr>

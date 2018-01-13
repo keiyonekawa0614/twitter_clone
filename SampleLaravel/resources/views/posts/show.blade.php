@@ -14,7 +14,7 @@
 
 <!-- 記事内容 -->
 <div id="post-body">
-    {{ $post->body }}
+    {!! nl2br(e( $post->body )) !!}
 </div>
 
 <hr>
