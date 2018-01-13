@@ -6,13 +6,19 @@
 <h1 id="post-title">{{ $title }}</h1>
 
 <!-- 編集・削除ボタン -->
-<div class="edit">
+<!-- <div class="edit">
     <a href="{{ url('posts/'.$post->id.'/edit') }}" class="btn btn-primary">
         {{ __('Edit') }}
     </a>
-</div>
+</div> -->
 
 <!-- 記事内容 -->
+<div id="post-body">
+    {!! nl2br(e( $post->body )) !!}
+</div>
+
+<hr>
+
 <dl class="row">
     <dt class="col-md-2">{{ __('Created') }}:</dt>
     <dd class="col-md-10">
@@ -27,8 +33,7 @@
         </time>
     </dd>
 </dl>
-<hr>
-<div id="post-body">
-    {{ $post->body }}
-</div>
+
+
+
 @endsection

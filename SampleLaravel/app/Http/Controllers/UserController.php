@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Post;
+use App\Follow;
 
 class UserController extends Controller
 {
@@ -15,7 +19,10 @@ class UserController extends Controller
     public function index()
     {
       $users = User::all();
-      return view('users.index', ['users' => $users]);
+      $id = Auth::id();
+      $follow_id = Follow::where('user_id','=',$id)->get(['follow_id']);
+      $array_follow_id = array_column($follow_id->toArray(), 'follow_id');
+      return view('users.index', ['users' => $users, 'array_follow_id' =>$array_follow_id]);
     }
 
     /**
@@ -52,7 +59,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', ['user' => $user]);
+        $id = Auth::id();
+        $follow_id = Follow::where('user_id','=',$id)->get(['follow_id']);
+        $array_follow_id = array_column($follow_id->toArray(), 'follow_id');
+        $posts = DB::select('select * from posts where user_id = ? order by created_at desc', [$user->id]);
+        return view('users.show', ['user' => $user,'posts' => $posts, 'array_follow_id' => $array_follow_id]);
     }
 
     /**
@@ -63,6 +74,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+
       return view('users.edit', ['user' => $user]);
 
     }
@@ -78,6 +90,10 @@ class UserController extends Controller
     {
       $user->name = $request->name;
       $user->save();
+
+      $userName = $request->name;
+      $userId = $user->id;
+      DB::update('update posts set user_name = ? where user_id = ?', [$userName, $userId]);
       return redirect('users/'.$user->id);
     }
 

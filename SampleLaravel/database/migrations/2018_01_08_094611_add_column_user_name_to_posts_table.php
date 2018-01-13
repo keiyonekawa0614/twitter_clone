@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticlesTable extends Migration
+class AddColumnUserNameToPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('title');
-            $table->text('body');
-            $table->timestamps();
-        });
+      Schema::table('posts', function (Blueprint $table) {
+       $table->string('user_name')->after('user_id');
+      });
     }
 
     /**
@@ -28,6 +25,6 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articles');
+        //
     }
 }
