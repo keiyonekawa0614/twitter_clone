@@ -38,13 +38,5 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function checkAuth()
-    {
-      if (Auth::check()) {
-        $posts = Post::latest()->get();
-        return view('posts.index', ['posts' => $posts]);
-      } else {
-        return view('auth/login');
-      }
-    }
+
 }
