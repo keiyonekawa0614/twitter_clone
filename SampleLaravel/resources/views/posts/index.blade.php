@@ -46,7 +46,7 @@
 												<div class="media-body">
                           <a style="text-decoration: none;color: black;" href="#" data-toggle="modal" data-target="#detailModal" data-whatever="{{ $post->user_name }},{{ $post->created_at }},{{ $post->body }}">
                             <!-- ツイート詳細ページ(ポップ画面表示)-->
-                            <div class="modal fade" id="detailModal"tabindex="-1"role="dialog"aria-labelledby="basicModal"aria-hidden="true">
+                            <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                               <div class="modal-dialog">
                                 <div class="modal-content">
                                   <div class="modal-body">

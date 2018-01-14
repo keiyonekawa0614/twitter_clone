@@ -13,7 +13,7 @@
     <!-- Bootstrap用CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="js/modal.js"></script>
+    <script type="text/javascript" src="{{ asset('js/modal.js') }}"></script>
 </head>
 <body>
     <!-- グローバルナビ -->
@@ -59,7 +59,6 @@
                                                       <textarea style="width: initial;" id="body" class="form-control" name="body" rows="3" cols="40" placeholder="いまどうしてる？" required></textarea>
                                                    </div>
                                                    <button type="submit" name="submit" class="btn btn-info btn-sm" style="margin-bottom:5px;">{{ __('ツイート') }}</button>
-                                                   <button type="button"class="btn btn-default btn-sm"data-dismiss="modal">Close</button>
                                                </form>
                                              </div>
                                            </div>
