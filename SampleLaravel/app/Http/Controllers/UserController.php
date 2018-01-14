@@ -9,6 +9,11 @@ use App\Post;
 
 class UserController extends Controller
 {
+
+    public function __construct() {
+    $this->middleware('auth')->except(['store']);
+    }
+    
     /**
      * ユーザー一覧ページ表示
      *
