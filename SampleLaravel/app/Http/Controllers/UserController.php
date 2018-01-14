@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Post;
-use App\Follow;
 
 class UserController extends Controller
 {
@@ -53,6 +51,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user) {
+      $user1 = new User;
       $user1->updateUser($request, $user);
       return redirect('users/'.$user->id);
     }
