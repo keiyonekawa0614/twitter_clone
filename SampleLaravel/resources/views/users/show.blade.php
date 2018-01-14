@@ -1,4 +1,5 @@
 @php
+    use App\Follow;
     $title = __('User') . ': ' . $user->name;
     $userName = Auth::user()->name;
     $name = $user->name;
@@ -7,7 +8,7 @@
 @section('content')
 
 <div class="table-responsive">
-  <div class="container">
+  <div class="container" style="overflow: hidden;">
 	<div class="row" style="margin-right: -195px;margin-left: 195px;">
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
@@ -24,11 +25,19 @@
                     <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
                   </a>
                   <div class="media-body">
-                    <h4 class="title">
-                       Name : {{ $user->name }}
+                    <h4 class="title" style="color:black;">
+                       {{ $user->name }}
                     </h4>
+                    <h4 class="title" style="color:black;">
+                       {{ $user->email }}
+                    </h4>
+                    @php
+                    $follow_count = Follow::where('user_id','=',$user->id)->count();
+                    $follower_count = Follow::where('follow_id','=',$user->id)->count();
+                    @endphp
                     <h4 class="title">
-                       Email : {{ $user->email }}
+                    {{$follow_count}}<span class="pagado">フォロー</span>
+                    {{$follower_count}}<span class="pagado">フォロワー</span>
                     </h4>
                     <!-- start 編集・フォローする・フォロー解除ボタン -->
                     @if($userName == $name)
@@ -103,7 +112,7 @@
 </div>
 <hr>
 <div class="table-responsive">
-  <div class="container">
+  <div class="container" style="overflow: hidden;">
   <div class="row" style="margin-right: -195px;margin-left: 195px;">
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">

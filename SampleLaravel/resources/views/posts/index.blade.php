@@ -11,7 +11,7 @@
 @extends('layouts.my')
 @section('content')
 <div class="table-responsive">
-  <div class="container">
+  <div class="container" style="overflow: hidden;">
 	<div class="row" style="margin-right: -195px;margin-left: 195px;">
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">

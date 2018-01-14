@@ -1,10 +1,11 @@
 @php
+    use App\Follow;
     $title = __('Users');
 @endphp
 @extends('layouts.my')
 @section('content')
 <div class="table-responsive">
-  <div class="container">
+  <div class="container" style="overflow: hidden;">
 	<div class="row" style="margin-right: -195px;margin-left: 195px;">
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
@@ -23,6 +24,14 @@
                   <div class="media-body">
                     <h4 class="title">
                       <a href="{{ url('users/'.$user->id) }}">{{ $user->name }}</a>
+                    </h4>
+                    @php
+                    $follow_count = Follow::where('user_id','=',$user->id)->count();
+                    $follower_count = Follow::where('follow_id','=',$user->id)->count();
+                    @endphp
+                    <h4 class="title">
+                    {{$follow_count}}<span class="pagado">フォロー</span>
+                    {{$follower_count}}<span class="pagado">フォロワー</span>
                     </h4>
                     @if(Auth::user()->name != $user->name)
                     @php
