@@ -16,6 +16,11 @@ class Post extends Model
       return $posts;
     }
 
+    // 自身のユーザー投稿情報取得
+    public function searchUserPost($id) {
+      return DB::select('select * from posts where user_id = ? order by created_at desc', [$id]);
+    }
+
     // ツイート登録
     public function insertPost($request) {
       $post = new Post;

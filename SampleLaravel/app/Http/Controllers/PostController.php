@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -24,10 +23,8 @@ class PostController extends Controller
     public function index() {
       if (Auth::check()) {
         $post = new Post;
-        // ツイート取得
-        $posts = $post->searchPost(Auth::id());
         // ツイート一覧ページ遷移
-        return view('posts.index', ['posts' => $posts, 'postdata'=>Session::get('_old_input')]);
+        return view('posts.index', ['posts' => $post->searchPost(Auth::id()), 'postdata'=>Session::get('_old_input')]);
       } else {
         // ログインページにリダイレクト
         return redirect('/login');
