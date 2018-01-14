@@ -25,7 +25,6 @@ class Post extends Model
       $post = new Post;
       $post->body = $request->body;
       $post->user_id = Auth::id();
-      $post->user_name = Auth::user()->name;
       $post->save();
     }
 }
