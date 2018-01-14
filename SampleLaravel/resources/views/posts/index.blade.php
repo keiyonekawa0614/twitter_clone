@@ -44,7 +44,7 @@
 													<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
 												</a>
 												<div class="media-body">
-                          <a style="text-decoration: none;color: black;" href="#" data-toggle="modal" data-target="#detailModal" data-whatever="{{ $post->user_name }},{{ $post->created_at }},{{ $post->body }}">
+                          <a style="text-decoration: none;color: black;" href="#" data-toggle="modal" data-target="#detailModal" data-whatever="{{ $post->name }},{{ $post->created_at }},{{ $post->body }}">
                             <!-- ツイート詳細ページ(ポップ画面表示)-->
                             <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                               <div class="modal-dialog">
@@ -82,8 +82,8 @@
                             <!-- ツイート詳細ページ(ポップ画面表示)-->
 													<span style="float: right!important;" class="media-meta">{{ $post->created_at }}</span>
 													<h4 class="title">
-														{{ $post->user_name }}
-														<span style="float: right!important;" class="pagado">{{ $post->user_name }}</span>
+														{{ $post->name }}
+														<span style="float: right!important;" class="pagado">{{ $post->name }}</span>
 													</h4>
 													<p class="summary">{!! nl2br(e( $post->body )) !!}</p>
                         </div>
