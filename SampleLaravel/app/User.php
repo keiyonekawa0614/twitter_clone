@@ -54,7 +54,6 @@ class User extends Authenticatable
     public function updateUser($request, $user) {
       $user->name = $request->name;
       $user->save();
-      DB::update('update posts set user_name = ? where user_id = ?', [$request->name, $user->id]);
     }
 
 

@@ -1,8 +1,8 @@
 @php
-    use App\Follow;
-    $title = __('User') . ': ' . $user->name;
-    $userName = Auth::user()->name;
-    $name = $user->name;
+use App\Follow;
+$title = __('User') . ': ' . $user->name;
+$userName = Auth::user()->name;
+$name = $user->name;
 @endphp
 @extends('layouts.my')
 @section('content')
@@ -14,6 +14,7 @@
     <div class="panel panel-default">
       <div class="panel-body" style="padding: 15px;">
         <div class="table-container">
+        {{-- start ユーザーアカウント情報 --}}
 				<table class="table table-filter">
 					<tbody>
             <tr data-status="pagado">
@@ -31,6 +32,8 @@
                     <h4 class="title" style="color:black;">
                        {{ $user->email }}
                     </h4>
+
+                    {{-- start フォロー・フォロワーカウント表示 --}}
                     @php
                     $follow_count = Follow::where('user_id','=',$user->id)->count();
                     $follower_count = Follow::where('follow_id','=',$user->id)->count();
@@ -39,13 +42,16 @@
                     {{$follow_count}}<span class="pagado">フォロー</span>
                     {{$follower_count}}<span class="pagado">フォロワー</span>
                     </h4>
-                    <!-- start 編集・フォローする・フォロー解除ボタン -->
+                    {{-- end フォロー・フォロワーカウント表示 --}}
+
+                    {{-- start 編集・フォローする・フォロー解除ボタン --}}
                     @if($userName == $name)
                     <span style="float: right!important;">
                     <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal" data-username="{{ $user->name }}">
                         {{ __('編集') }}
                     </a>
-                    <!-- アカウント情報編集ページ(ポップ画面表示)-->
+
+                    {{-- start アカウント情報編集ページ(ポップ画面表示)--}}
                     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
@@ -73,7 +79,7 @@
                         </div>
                       </div>
                     </div>
-                    <!--アカウント情報編集ページ(ポップ画面表示)-->
+                    {{--end アカウント情報編集ページ(ポップ画面表示)--}}
 
                     </span>
                     @else
@@ -94,21 +100,22 @@
                         </span>
                     　@endif
                     @endif
-                    <!-- end 編集・フォローする・フォロー解除ボタン -->
+                    {{-- end 編集・フォローする・フォロー解除ボタン --}}
                   </div>
-                </div>
-                </a>
-              </td>
-            </tr>
-        </tbody>
-      </tbody>
-    </table>
-  </div>
-</div>
-</div>
-</div>
-</div>
-</div>
+                  </div>
+                  </a>
+                 </td>
+                </tr>
+              </tbody>
+            </tbody>
+           </table>
+           {{-- end ユーザーアカウント情報 --}}
+         </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
 </div>
 <hr>
 <div class="table-responsive">
@@ -130,8 +137,8 @@
                           <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
                         </a>
                         <div class="media-body">
-                          <a style="text-decoration: none;color: black;" href="#" data-toggle="modal" data-target="#detailModal" data-whatever="{{ $post->user_name }},{{ $post->created_at }},{{ $post->body }}">
-                            <!-- start ツイート詳細ページ(ポップ画面表示)-->
+                          <a style="text-decoration: none;color: black;" href="#" data-toggle="modal" data-target="#detailModal" data-whatever="{{ $post->name }},{{ $post->created_at }},{{ $post->body }}">
+                            {{-- start ツイート詳細ページ(ポップ画面表示)--}}
                             <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                               <div class="modal-dialog">
                                 <div class="modal-content">
@@ -165,11 +172,11 @@
                                 </div>
                               </div>
                             </div>
-                            <!-- end ツイート詳細ページ(ポップ画面表示)-->
+                            {{-- end ツイート詳細ページ(ポップ画面表示)--}}
                           <span style="float: right!important;" class="media-meta">{{ $post->created_at }}</span>
                           <h4 class="title">
-                            {{ $post->user_name }}
-                            <span style="float: right!important;" class="pagado">{{ $post->user_name }}</span>
+                            {{ $post->name }}
+                            <span style="float: right!important;" class="pagado">{{ $post->name }}</span>
                           </h4>
                           <p class="summary">{!! nl2br(e( $post->body )) !!}</p>
                         </div>
