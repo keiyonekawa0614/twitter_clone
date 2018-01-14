@@ -12,19 +12,17 @@
 
     <!-- Bootstrap用CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{{ asset('js/modal.js') }}"></script>
 </head>
 <body>
     <!-- グローバルナビ -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="padding: initial;background-color:#1da1f2;">
         <div class="container">
             <!-- アプリ名 -->
-            <a class="navbar-brand" href="{{ url('/posts') }}">Twiiter_clone</a>
-
-            <!-- モバイル画面用のメニュー開閉ボタン -->
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
+            <a class="navbar-brand" href="{{ url('/posts') }}">
+               <img class="logo" src="{{ asset('image/Twitter_Logo_WhiteOnBlue.png') }}" alt="logo" style="width:50px;height:50px;">ホーム
+            </a>
             <!-- メニュー項目 -->
             <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
                 <!-- 右詰め -->
@@ -40,9 +38,39 @@
                     @else
                     <!-- ツイート投稿ボタン -->
                        <li class="nav-item">
-                          <a href="{{ url('posts/create') }}" id="new-post" class="btn btn-success">
+                          <a href="#" id="new-post" class="btn btn-info" style="color: #fff;" data-toggle="modal" data-target="#basicModal">
                               {{ __('ツイート') }}
                            </a>
+                           <!-- ツイート投稿ページ(ポップアップ画面)-->
+                           <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+                             <div class="modal-dialog">
+                               <div class="modal-content">
+                                 <div class="modal-body">
+                                   <div class="table-responsive">
+                                     <div class="container">
+                                   	  <div class="row" >
+                                         <div class="col-md-8 col-md-offset-2">
+                                           <div class=" panel-default">
+                                             <div class="panel-body" style="padding: 15px;">
+                                               <form action="{{ url('posts') }}" method="post">
+                                                 {{ csrf_field() }}
+                                                 {{ method_field('POST') }}
+                                                   <div style="margin-bottom:0.3rem;">
+                                                      <textarea style="width: initial;" id="body" class="form-control" name="body" rows="3" cols="40" placeholder="いまどうしてる？" required></textarea>
+                                                   </div>
+                                                   <button type="submit" name="submit" class="btn btn-info btn-sm" style="margin-bottom:5px;">{{ __('ツイート') }}</button>
+                                               </form>
+                                             </div>
+                                           </div>
+                                         </div>
+                                       </div>
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div>
+                             </div>
+                           </div>
+                           <!-- ツイート投稿ページ(ポップアップ画面)-->
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

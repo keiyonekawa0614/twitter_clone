@@ -10,9 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('auth/login');
-});
+
+Route::get('/', 'Controller@authCheck');
 
 Auth::routes();
 
@@ -21,5 +20,3 @@ Route::resource('users', 'UserController');
 Route::resource('posts', 'PostController');
 
 Route::resource('follows', 'FollowController');
-
-Route::resource('followers', 'FollowerController');
