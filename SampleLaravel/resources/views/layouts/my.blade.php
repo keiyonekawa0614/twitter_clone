@@ -17,11 +17,11 @@
 </head>
 <body>
     <!-- グローバルナビ -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="padding: initial;background-color:#1da1f2;">
         <div class="container">
             <!-- アプリ名 -->
             <a class="navbar-brand" href="{{ url('/posts') }}">
-               <img class="logo" src="{{ asset('image/Twitter_Logo_Blue.png') }}" alt="logo" style="width:50px;height:50px;">ホーム
+               <img class="logo" src="{{ asset('image/Twitter_Logo_WhiteOnBlue.png') }}" alt="logo" style="width:50px;height:50px;">ホーム
             </a>
             <!-- メニュー項目 -->
             <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
@@ -38,7 +38,7 @@
                     @else
                     <!-- ツイート投稿ボタン -->
                        <li class="nav-item">
-                          <a href="#" id="new-post" class="btn btn-info btn-sm" data-toggle="modal" data-target="#basicModal">
+                          <a href="#" id="new-post" class="btn btn-info" style="color: #fff;" data-toggle="modal" data-target="#basicModal">
                               {{ __('ツイート') }}
                            </a>
                            <!-- ツイート投稿ページ(ポップアップ画面)-->
