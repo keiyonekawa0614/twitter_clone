@@ -7,8 +7,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Session;
 
-class Post extends Model
-{
+class Post extends Model {
+
+    public function users() {
+      return $this->hasMany('App\User');
+    }
+
     // ユーザー投稿情報を取得
     public function searchPost($id) {
       // 自身のツイートとフォローしているユーザーのツイートを取得する

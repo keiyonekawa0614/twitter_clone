@@ -13,14 +13,13 @@ class UserController extends Controller
     public function __construct() {
     $this->middleware('auth')->except(['store']);
     }
-    
+
     /**
      * ユーザー一覧ページ表示
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-      $user = new User;
+    public function index(User $user) {
       return view('users.index', ['users' => $user->selectAllUser(), 'array_follow_id' =>$user->searchArrayFollowId()]);
     }
 
@@ -30,8 +29,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-      $user = new User;
+    public function store(Request $request, User $user) {
       $user->insertUser($request);
       return redirect('users/'.$user->id);
     }
@@ -42,10 +40,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user) {
-      $user1 = new User;
-      $post = new Post;
-      return view('users.show', ['user' => $user,'posts' => $post->searchUserPost($user->id), 'array_follow_id' => $user1->searchArrayFollowId()]);
+    public function show(User $user, Post $post) {
+      return view('users.show', ['user' => $user,'posts' => $post->searchUserPost($user->id), 'array_follow_id' => $user->searchArrayFollowId()]);
     }
 
     /**
@@ -56,8 +52,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user) {
-      $user1 = new User;
-      $user1->updateUser($request, $user);
+      $user->updateUser($request, $user);
       return redirect('users/'.$user->id);
     }
 }

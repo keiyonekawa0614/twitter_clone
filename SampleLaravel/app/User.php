@@ -29,6 +29,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function posts() {
+      return $this->hasMany('App\Posts');
+    }
+
     // ユーザー情報全件取得
     public function selectAllUser() {
         return User::all();
@@ -36,7 +40,6 @@ class User extends Authenticatable
 
     // フォローidを配列で取得
     public function searchArrayFollowId() {
-      $id = Auth::id();
       $follow_id = Follow::where('user_id','=', Auth::id())->get(['follow_id']);
       return array_column($follow_id->toArray(), 'follow_id');
     }

@@ -7,11 +7,9 @@ use App\Post;
 use Illuminate\Support\Facades\Auth;
 use Session;
 
-class PostController extends Controller
-{
+class PostController extends Controller {
 
-    public function __construct()
-    {
+    public function __construct() {
       $this->middleware('auth')->except(['index', 'show']);
     }
 
@@ -20,9 +18,8 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index(Post $post) {
       if (Auth::check()) {
-        $post = new Post;
         // ツイート一覧ページ遷移
         return view('posts.index', ['posts' => $post->searchPost(Auth::id()), 'postdata'=>Session::get('_old_input')]);
       } else {
@@ -37,8 +34,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
-      $post = new Post;
+    public function store(Request $request, Post $post){
       // ツイート登録
       $post->insertPost($request);
       return redirect('/posts')->withInput();
