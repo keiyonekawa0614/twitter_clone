@@ -29,6 +29,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function posts() {
+      return $this->hasMany('App\Posts');
+    }
+
     // ユーザー情報全件取得
     public function selectAllUser() {
         return User::all();
