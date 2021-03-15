@@ -1,33 +1,24 @@
-FROM centos:6
+FROM php:7.2-apache
 
-RUN yum -y update
 
-RUN yum -y install git
-RUN yum -y install zip unzip
+RUN apt-get update \
+    && apt-get install -y zlib1g-dev mariadb-client libpng-dev libjpeg-dev gnupg curl wget \
+    # && mv /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled \
+    && docker-php-ext-configure gd --with-png-dir=/usr/include --with-jpeg-dir=/usr/include \
+    && docker-php-ext-install zip pdo_mysql gd
 
-RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
-RUN rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
-RUN yum install -y httpd
-RUN yum install --enablerepo=epel,remi-php70,remi -y \
-                              php \
-                              php-cli \
-                              php-gd \
-                              php-mbstring \
-                              php-mcrypt \
-                              php-mysqlnd \
-                              php-pdo \
-                              php-xml \
-                              php-xdebug \
-                              php-memcached \
-                              php-devel
-RUN sed -i -e "s|^;date.timezone =.*$|date.timezone = Asia/Tokyo|" /etc/php.ini
+COPY 000-default.conf /etc/apache2/sites-enabled/
+RUN a2enmod rewrite
 
-RUN curl -s https://getcomposer.org/installer | php
-RUN mv ./composer.phar /usr/local/bin/composer
+# composer install
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+RUN php -r "if (hash_file('SHA384', 'composer-setup.php') === '$(wget -q -O - https://composer.github.io/installer.sig)') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+RUN php composer-setup.php
+RUN php -r "unlink('composer-setup.php');"
+RUN mv composer.phar /usr/local/bin/composer
 
-RUN cp /usr/share/zoneinfo/Japan /etc/localtime
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_HOME /composer
+ENV PATH $PATH:/composer/vendor/bin
 
-COPY httpd.conf /etc/httpd/conf.d/httpd.conf
-
-EXPOSE 80
-CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
+WORKDIR /var/www/html
