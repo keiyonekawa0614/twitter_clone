@@ -17,7 +17,7 @@
 </head>
 <body>
     {{-- グローバルナビ --}}
-    <nav class="navbar navbar-expand-lg navbar-dark" style="padding: initial;background-color:#1da1f2;">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#1da1f2;">
         <div class="container">
             {{-- アプリ名 --}}
             <a class="navbar-brand" href="{{ url('/posts') }}">
@@ -49,14 +49,14 @@
                                    <div class="table-responsive">
                                      <div class="container">
                                    	  <div class="row" >
-                                         <div class="col-md-8 col-md-offset-2">
+                                         <div style="margin: 0 auto;">
                                            <div class=" panel-default">
-                                             <div class="panel-body" style="padding: 15px;">
+                                             <div class="panel-body">
                                                <form action="{{ url('posts') }}" method="post">
                                                  {{ csrf_field() }}
                                                  {{ method_field('POST') }}
                                                    <div style="margin-bottom:0.3rem;">
-                                                      <textarea style="width: initial;" id="body" class="form-control" name="body" rows="3" cols="40" placeholder="いまどうしてる？" required></textarea>
+                                                      <textarea id="body" class="form-control" name="body" rows="3" cols="40" placeholder="いまどうしてる？" required></textarea>
                                                    </div>
                                                    <button type="submit" name="submit" class="btn btn-info btn-sm" style="margin-bottom:5px;">{{ __('ツイート') }}</button>
                                                </form>

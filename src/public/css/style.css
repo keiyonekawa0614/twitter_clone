@@ -132,3 +132,6 @@ body {
 .table-filter .media .summary {
 	font-size: 14px;
 }
+.col-md-8 {
+	margin: 0 auto;
+}

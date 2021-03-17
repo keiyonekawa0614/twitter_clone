@@ -9,7 +9,7 @@ $name = $user->name;
 
 <div class="table-responsive">
   <div class="container" style="overflow: hidden;">
-	<div class="row" style="margin-right: -195px;margin-left: 195px;">
+	<div class="row">
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
       <div class="panel-body" style="padding: 15px;">
@@ -20,7 +20,6 @@ $name = $user->name;
             <tr data-status="pagado">
               <span>Account</span>
               <td>
-                <a style="text-decoration: none;color: black;" >
                 <div class="media">
                   <a href="#" style="padding-right: 10px;float: left!important;">
                     <img src="{{ asset('image/default_icon.png') }}" class="media-photo">
@@ -120,7 +119,7 @@ $name = $user->name;
 <hr>
 <div class="table-responsive">
   <div class="container" style="overflow: hidden;">
-  <div class="row" style="margin-right: -195px;margin-left: 195px;">
+  <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
       <div class="panel-body" style="padding: 15px;">
