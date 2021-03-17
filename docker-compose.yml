@@ -10,7 +10,7 @@ services:
     links:
       - twitter_db
     volumes:
-      - ./SampleLaravel:/var/www/html
+      - ./src:/var/www/html
     #restart: always
 
   twitter_db:
