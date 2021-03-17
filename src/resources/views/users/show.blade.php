@@ -23,7 +23,7 @@ $name = $user->name;
                 <a style="text-decoration: none;color: black;" >
                 <div class="media">
                   <a href="#" style="padding-right: 10px;float: left!important;">
-                    <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                    <img src="{{ asset('image/default_icon.png') }}" class="media-photo">
                   </a>
                   <div class="media-body">
                     <h4 class="title" style="color:black;">
@@ -134,7 +134,7 @@ $name = $user->name;
                       <a style="text-decoration: none;color: black;" >
                       <div class="media">
                         <a href="#" style="padding-right: 10px;float: left!important;">
-                          <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                          <img src="{{ asset('image/default_icon.png') }}" class="media-photo">
                         </a>
                         <div class="media-body">
                           <a style="text-decoration: none;color: black;" href="#" data-toggle="modal" data-target="#detailModal" data-whatever="{{ $post->name }},{{ $post->created_at }},{{ $post->body }}">
@@ -151,7 +151,7 @@ $name = $user->name;
                                            <a style="text-decoration: none;color: black;" >
                                             <div class="media">
                                                <a href="#" style="padding-right: 10px;float: left!important;">
-                                               <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                                               <img src="{{ asset('image/default_icon.png') }}" class="media-photo">
                                                </a>
                                             <div class="media-body">
                                                 <span style="float: right!important;" class="media-meta">登録日時</span>
