@@ -1,5 +1,6 @@
 # Abstract
-Laravel5.5 php7 create twitter_clone
+- Laravel Framework 6.20.18
+- PHP 7.2.33
 
 
 ```
