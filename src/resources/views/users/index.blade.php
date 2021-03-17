@@ -1,5 +1,5 @@
 @php
-use App\Follow;
+use App\Models\Follow;
 $title = __('Users');
 @endphp
 @extends('layouts.my')

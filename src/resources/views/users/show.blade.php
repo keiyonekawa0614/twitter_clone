@@ -1,5 +1,5 @@
 @php
-use App\Follow;
+use App\Models\Follow;
 $title = __('User') . ': ' . $user->name;
 $userName = Auth::user()->name;
 $name = $user->name;

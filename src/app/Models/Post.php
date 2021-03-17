@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -10,7 +10,7 @@ use Session;
 class Post extends Model {
 
     public function users() {
-      return $this->hasMany('App\User');
+      return $this->hasMany('App\Models\User');
     }
 
     // ユーザー投稿情報を取得

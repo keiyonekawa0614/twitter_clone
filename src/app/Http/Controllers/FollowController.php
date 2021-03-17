@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Follow;
+use App\Models\Follow;
 use Illuminate\Support\Facades\Auth;
 
 class FollowController extends Controller
