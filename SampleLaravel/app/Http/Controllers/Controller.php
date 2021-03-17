@@ -14,6 +14,6 @@ class Controller extends BaseController
     // ログイン画面表示
     public function authCheck()
     {
-     return view('auth/login');
+        return view('auth/login');
     }
 }
