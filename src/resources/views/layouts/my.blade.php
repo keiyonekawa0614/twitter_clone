@@ -16,86 +16,78 @@
     <script type="text/javascript" src="{{ asset('js/modal.js') }}"></script>
 </head>
 <body>
-    {{-- グローバルナビ --}}
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#1da1f2;">
-        <div class="container">
-            {{-- アプリ名 --}}
-            <a class="navbar-brand" href="{{ url('/posts') }}">
-               <img class="logo" src="{{ asset('image/Twitter_Logo_WhiteOnBlue.png') }}" alt="logo" style="width:50px;height:50px;">ホーム
-            </a>
-            {{-- メニュー項目 --}}
-            <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
-                {{-- 右詰め --}}
-                <ul class="navbar-nav my-2 my-lg-0s">
-                    {{-- ログイン・ログアウト --}}
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @else
-                    {{-- ツイート投稿ボタン --}}
-                       <li class="nav-item">
-                          <a href="#" id="new-post" class="btn btn-info" style="color: #fff;" data-toggle="modal" data-target="#basicModal">
-                              {{ __('ツイート') }}
-                           </a>
-                           {{-- start ツイート投稿ページ(ポップアップ画面)--}}
-                           <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                             <div class="modal-dialog">
-                               <div class="modal-content">
-                                 <div class="modal-body">
-                                   <div class="table-responsive">
-                                     <div class="container">
-                                   	  <div class="row" >
-                                         <div style="margin: 0 auto;">
-                                           <div class=" panel-default">
-                                             <div class="panel-body">
-                                               <form action="{{ url('posts') }}" method="post">
-                                                 {{ csrf_field() }}
-                                                 {{ method_field('POST') }}
-                                                   <div style="margin-bottom:0.3rem;">
-                                                      <textarea id="body" class="form-control" name="body" rows="3" cols="40" placeholder="いまどうしてる？" required></textarea>
-                                                   </div>
-                                                   <button type="submit" name="submit" class="btn btn-info btn-sm" style="margin-bottom:5px;">{{ __('ツイート') }}</button>
-                                               </form>
-                                             </div>
-                                           </div>
-                                         </div>
-                                       </div>
-                                     </div>
-                                   </div>
-                                 </div>
-                               </div>
-                             </div>
-                           </div>
-                           {{-- end ツイート投稿ページ(ポップアップ画面)--}}
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
-                                <a class="dropdown-item" href="{{ url('users/'.auth()->user()->id) }}">
-                                    {{ __('Profile') }}
-                                </a>
-                                <a class="dropdown-item" href="{{ url('users') }}">
-                                    {{ __('Users') }}
-                                </a>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ url('/posts') }}">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        @guest
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+          </li>
+        @else
+          <li class="nav-item">
+            <a href="#" id="new-post" class="nav-link" data-toggle="modal" data-target="#basicModal">{{ __('Tweet') }}</a>
+            {{-- start ツイート投稿ページ(ポップアップ画面)--}}
+            <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <div class="table-responsive">
+                      <div class="container">
+                        <div class="row" >
+                          <div style="margin: 0 auto;">
+                            <div class=" panel-default">
+                              <div class="panel-body">
+                                <form action="{{ url('posts') }}" method="post">
+                                  {{ csrf_field() }}
+                                  {{ method_field('POST') }}
+                                    <div style="margin-bottom:0.3rem;">
+                                        <textarea id="body" class="form-control" name="body" rows="3" cols="40" placeholder="いまどうしてる？" required></textarea>
+                                    </div>
+                                    <button type="submit" name="submit" class="btn btn-info btn-sm" style="margin-bottom:5px;">{{ __('ツイート') }}</button>
                                 </form>
+                              </div>
                             </div>
-                        </li>
-                    @endguest
-                </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
-    </nav>
+            {{-- end ツイート投稿ページ(ポップアップ画面)--}}
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Setting
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{ url('users/'.auth()->user()->id) }}">{{ __('Profile') }}</a>
+              <a class="dropdown-item" href="{{ url('users') }}">{{ __('Users') }}</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+              </form>
+            </div>
+          </li>
+        @endguest
+      </ul>
+      @auth
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      @endauth
+    </div>
+  </nav>
     {{-- 個別ページの内容 --}}
     <div class="container mt-3">
         @yield('content')

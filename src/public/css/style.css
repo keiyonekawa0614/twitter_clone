@@ -118,7 +118,6 @@ body {
 }
 .table-filter .media .title span {
 	font-size: .8em;
-	margin-right: 20px;
 }
 .table-filter .media .title span.pagado {
 	color: #5cb85c;
@@ -134,4 +133,6 @@ body {
 }
 .col-md-8 {
 	margin: 0 auto;
+	padding-left: 0px;
+	padding-right: 0px;
 }
