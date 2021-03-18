@@ -33,13 +33,15 @@ class User extends Authenticatable
       return $this->hasMany('App\Posts');
     }
 
-    // ユーザー情報全件取得
-    public function selectAllUser() {
-        return User::all();
+    /**
+     * ユーザー情報とフォロー数、フォロワー数を取得
+     */
+    public static function selectAllUser() {
+        return User::withCount(['follow', 'follower'])->get();
     }
 
     // フォローidを配列で取得
-    public function searchArrayFollowId() {
+    public static function searchArrayFollowId() {
       $follow_id = Follow::where('user_id','=', Auth::id())->get(['follow_id']);
       return array_column($follow_id->toArray(), 'follow_id');
     }
@@ -59,7 +61,19 @@ class User extends Authenticatable
       $user->save();
     }
 
+    /**
+     * follow relation
+     */
+    public function follow() {
+      return $this->hasMany('App\Models\Follow', 'user_id');
+    }
 
+    /**
+     * follower relation
+     */
+    public function follower() {
+      return $this->hasMany('App\Models\Follow', 'follow_id');
+    }
 
 
 }

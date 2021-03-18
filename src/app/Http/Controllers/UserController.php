@@ -19,8 +19,13 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(User $user) {
-      return view('users.index', ['users' => $user->selectAllUser(), 'array_follow_id' =>$user->searchArrayFollowId()]);
+    public function index() {
+      $user = User::selectAllUser();
+      $array_follow_id = User::searchArrayFollowId();
+      return view('users.index', [
+        'users' => $user,
+        'array_follow_id' => $array_follow_id
+      ]);
     }
 
     /**

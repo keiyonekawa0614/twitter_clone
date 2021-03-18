@@ -27,13 +27,9 @@ $title = __('Users');
                     </h4>
 
                     {{-- start フォロー・フォロワーのカウント表示 --}}
-                    @php
-                    $follow_count = Follow::where('user_id','=',$user->id)->count();
-                    $follower_count = Follow::where('follow_id','=',$user->id)->count();
-                    @endphp
                     <h4 class="title">
-                    {{$follow_count}}<span class="pagado">フォロー</span>
-                    {{$follower_count}}<span class="pagado">フォロワー</span>
+                      {{$user->follow_count}}<span class="pagado">フォロー</span>
+                      {{$user->follower_count}}<span class="pagado">フォロワー</span>
                     </h4>
                     {{-- end フォロー・フォロワーのカウント表示 --}}
 
