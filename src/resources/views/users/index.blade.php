@@ -7,7 +7,7 @@ $title = __('Users');
 <div class="table-responsive">
   <div class="container">
 	  <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-8 mx-auto">
         <div class="panel panel-default">
           <div class="panel-body" style="padding: 15px;">
             <div class="table-container">

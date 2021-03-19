@@ -11,7 +11,7 @@ if (!empty($postdata)) {
 <div class="table-responsive">
   <div class="container" style="overflow: hidden;">
     <div class="row">
-      <div class="col-md-8 col-md-offset-2">
+      <div class="col-md-8 col-md-offset-2 mx-auto">
         <div class="panel panel-default">
           <div class="panel-body" style="padding: 15px;">
 
@@ -88,7 +88,6 @@ if (!empty($postdata)) {
                           <span style="float: right!important;" class="media-meta">{{ $post->created_at }}</span>
 													<h4 class="title">
 														{{ $post->name }}
-														<span style="float: right!important;" class="pagado">{{ $post->name }}</span>
 													</h4>
 													<p class="summary">{!! nl2br(e( $post->body )) !!}</p>
                         </div>

@@ -4,6 +4,7 @@
 body {
 	font-family: 'Open Sans', sans-serif;
 	color: #353535;
+	padding-top: 60px;
 }
 .content h1 {
 	text-align: center;
@@ -132,7 +133,6 @@ body {
 	font-size: 14px;
 }
 .col-md-8 {
-	margin: 0 auto;
 	padding-left: 0px;
 	padding-right: 0px;
 }
