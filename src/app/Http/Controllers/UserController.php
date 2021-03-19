@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Post;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -20,7 +21,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-      $user = User::selectAllUser();
+      $user = User::findAll();
       $array_follow_id = User::searchArrayFollowId();
       return view('users.index', [
         'users' => $user,
@@ -45,8 +46,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user, Post $post) {
-      return view('users.show', ['user' => $user,'posts' => $post->searchUserPost($user->id), 'array_follow_id' => $user->searchArrayFollowId()]);
+    public function show() {
+      $user = User::findOne();
+      return view('users.show', ['user' => $user]);
     }
 
     /**

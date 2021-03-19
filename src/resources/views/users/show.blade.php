@@ -33,18 +33,14 @@ $name = $user->name;
                     </h4>
 
                     {{-- start フォロー・フォロワーカウント表示 --}}
-                    @php
-                    $follow_count = Follow::where('user_id','=',$user->id)->count();
-                    $follower_count = Follow::where('follow_id','=',$user->id)->count();
-                    @endphp
+
                     <h4 class="title">
-                    {{$follow_count}}<span class="pagado">フォロー</span>
-                    {{$follower_count}}<span class="pagado">フォロワー</span>
+                    {{ $user->follow_count }}<span class="pagado">フォロー</span>
+                    {{ $user->follower_count }}<span class="pagado">フォロワー</span>
                     </h4>
                     {{-- end フォロー・フォロワーカウント表示 --}}
 
                     {{-- start 編集・フォローする・フォロー解除ボタン --}}
-                    @if($userName == $name)
                     <span style="float: right!important;">
                     <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal" data-username="{{ $user->name }}">
                         {{ __('編集') }}
@@ -79,27 +75,7 @@ $name = $user->name;
                       </div>
                     </div>
                     {{--end アカウント情報編集ページ(ポップ画面表示)--}}
-
                     </span>
-                    @else
-                    @php
-                    $key = in_array($user->id, $array_follow_id);
-                    @endphp
-                  　  @if($key)
-                        <span style="float: right!important;">
-                        <a href="{{ url('follows/'.$user->id) }}" class="btn btn-danger btn-sm">
-                          {{ __('フォロー解除') }}
-                        </a>
-                        </span>
-                  　  @else
-                        <span style="float: right!important;">
-                        <a href="{{ url('follows/'.$user->id.'/edit') }}" class="btn btn-primary btn-sm">
-                          {{ __('フォローする') }}
-                        </a>
-                        </span>
-                    　@endif
-                    @endif
-                    {{-- end 編集・フォローする・フォロー解除ボタン --}}
                   </div>
                   </div>
                   </a>
@@ -127,7 +103,7 @@ $name = $user->name;
 
               <table class="table table-filter">
                 <tbody>
-                  @foreach ($posts as $post)
+                  @foreach ($user->posts as $post)
                   <tr data-status="pagado">
                     <td>
                       <a style="text-decoration: none;color: black;" >
@@ -174,7 +150,7 @@ $name = $user->name;
                             {{-- end ツイート詳細ページ(ポップ画面表示)--}}
                           <span style="float: right!important;" class="media-meta">{{ $post->created_at }}</span>
                           <h4 class="title">
-                            {{ $post->name }}
+                            {{ $user->name }}
                           </h4>
                           <p class="summary">{!! nl2br(e( $post->body )) !!}</p>
                         </div>

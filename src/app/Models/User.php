@@ -29,15 +29,23 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function posts() {
-      return $this->hasMany('App\Posts');
+    /**
+     * 全ユーザー情報とフォロー数、フォロワー数を取得
+     */
+    public static function findAll() {
+        return User::withCount(['follow', 'follower'])->get();
     }
 
     /**
-     * ユーザー情報とフォロー数、フォロワー数を取得
+     * ログインユーザーに関する情報を取得
      */
-    public static function selectAllUser() {
-        return User::withCount(['follow', 'follower'])->get();
+    public static function findOne() {
+      return Auth::user()
+            ->withCount(['follow', 'follower'])
+            ->with(['posts' => function ($query) {
+                $query->orderBy('created_at', 'desc');
+              }])
+            ->first();
     }
 
     // フォローidを配列で取得
@@ -75,5 +83,8 @@ class User extends Authenticatable
       return $this->hasMany('App\Models\Follow', 'follow_id');
     }
 
+    public function posts() {
+      return $this->hasMany('App\Models\Post', 'user_id');
+    }
 
 }
