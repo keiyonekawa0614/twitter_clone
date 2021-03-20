@@ -15,7 +15,7 @@ Route::get('/', 'Controller@authCheck');
 
 Auth::routes();
 
-Route::resource('users', 'UserController');
+Route::resource('users', 'UserController')->middleware('auth');;
 
 Route::resource('posts', 'PostController');
 

@@ -10,9 +10,8 @@ use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
-
     public function __construct() {
-      $this->middleware('auth')->except(['store']);
+      $this->middleware('auth')->except(['index', 'show', 'store']);
     }
 
     /**
@@ -30,36 +29,40 @@ class UserController extends Controller
     }
 
     /**
-     * ユーザー新規作成
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request, User $user) {
-      $user->insertUser($request);
-      return redirect('users/'.$user->id);
-    }
-
-    /**
      * ユーザー詳細ページ表示
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show() {
-      $user = User::findOne();
+    public function show($id) {
+      if ($id != Auth::id()) {
+        return redirect('/posts');
+      }
+      $user = User::findOne($id);
       return view('users.show', ['user' => $user]);
+    }
+
+    /**
+     * ユーザー新規作成
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request) {
+      $user = new User;
+      $user->User::upsert($request, $user);
+      return redirect('users/' . $user->id);
     }
 
     /**
      * ユーザー更新
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user) {
-      $user->updateUser($request, $user);
-      return redirect('users/'.$user->id);
+    public function update(Request $request) {
+      $user = Auth::user();
+      User::upsert($request, $user);
+      return redirect('users/' . $user->id);
     }
 }

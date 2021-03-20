@@ -39,12 +39,12 @@ class User extends Authenticatable
     /**
      * ログインユーザーに関する情報を取得
      */
-    public static function findOne() {
-      return Auth::user()
-            ->withCount(['follow', 'follower'])
+    public static function findOne($id) {
+      return User::withCount(['follow', 'follower'])
             ->with(['posts' => function ($query) {
                 $query->orderBy('created_at', 'desc');
               }])
+            ->where('id', $id)
             ->first();
     }
 
@@ -54,19 +54,12 @@ class User extends Authenticatable
       return array_column($follow_id->toArray(), 'follow_id');
     }
 
-    // ユーザー新規登録
-    public function insertUser($request) {
-      $user = new User;
-      $user->name = $request->name;
-      $user->email = $request->email;
-      $user->password = $request->password;
-      $user->save();
-    }
-
-    // ユーザー更新
-    public function updateUser($request, $user) {
-      $user->name = $request->name;
-      $user->save();
+    /**
+     * 新規登録 or 更新
+     * @param  \Illuminate\Http\Request  $request
+     */
+    public static function upsert($request, $user) {
+      return $user->fill($request->all())->save();
     }
 
     /**

@@ -7,10 +7,10 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Session;
 
-class PostController extends Controller {
-
+class PostController extends Controller
+{
     public function __construct() {
-      $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     /**
@@ -19,13 +19,17 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index(Post $post) {
-      if (Auth::check()) {
-        // ツイート一覧ページ遷移
-        return view('posts.index', ['posts' => $post->searchPost(Auth::id()), 'postdata'=>Session::get('_old_input')]);
-      } else {
-        // ログインページにリダイレクト
-        return redirect('/login');
-      }
+        if (Auth::check()) {
+            // ツイート一覧ページ遷移
+            $posts = Post::searchPost(Auth::id());
+            return view('posts.index', [
+                'posts' => $posts,
+                'postdata'=>Session::get('_old_input')
+            ]);
+        } else {
+            // ログインページにリダイレクト
+            return redirect('/login');
+        }
     }
 
     /**
@@ -35,8 +39,8 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Post $post){
-      // ツイート登録
-      $post->insertPost($request);
-      return redirect('/posts')->withInput();
+        // ツイート登録
+        $post->insertPost($request);
+        return redirect('/posts')->withInput();
     }
 }
