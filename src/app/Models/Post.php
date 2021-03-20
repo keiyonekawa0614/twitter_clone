@@ -20,7 +20,7 @@ class Post extends Model {
     }
 
     // ツイート登録
-    public function insertPost($request) {
+    public static function insertPost($request) {
       $post = new Post;
       $post->body = $request->body;
       $post->user_id = Auth::id();

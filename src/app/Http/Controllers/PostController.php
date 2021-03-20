@@ -18,7 +18,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Post $post) {
+    public function index() {
         if (Auth::check()) {
             // ツイート一覧ページ遷移
             $posts = Post::searchPost(Auth::id());
@@ -38,9 +38,9 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Post $post){
+    public function store(Request $request){
         // ツイート登録
-        $post->insertPost($request);
+        Post::insertPost($request);
         return redirect('/posts')->withInput();
     }
 }
