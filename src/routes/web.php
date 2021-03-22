@@ -16,7 +16,7 @@ Route::get('/', 'Controller@authCheck');
 Auth::routes();
 
 Route::resource('users', 'UserController')->middleware('auth');;
-
 Route::resource('posts', 'PostController');
 
-Route::resource('follows', 'FollowController');
+Route::get('/follows/cancel/{id}', 'FollowController@cancel');
+Route::get('/follows/add/{id}', 'FollowController@add');

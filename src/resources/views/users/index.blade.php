@@ -37,13 +37,13 @@ $title = __('Users');
                         @if(Auth::user()->name != $user->name)
                           @if(in_array($user->id, $array_follow_id))
                             <span>
-                              <a href="{{ url('follows/'.$user->id) }}" class="btn btn-danger btn-sm">
+                              <a href="{{ url('follows/cancel/'.$user->id) }}" class="btn btn-danger btn-sm">
                                   {{ __('フォロー解除') }}
                               </a>
                             </span>
                           @else
                             <span>
-                              <a href="{{ url('follows/'.$user->id.'/edit') }}" class="btn btn-primary btn-sm">
+                              <a href="{{ url('follows/add/'.$user->id) }}" class="btn btn-primary btn-sm">
                                   {{ __('フォローする') }}
                               </a>
                             </span>
@@ -53,7 +53,7 @@ $title = __('Users');
                       {{-- end フォローする・フォロー解除ボタン切り替え --}}
                     </td>
                   </tr>
-                @endforeach
+                  @endforeach
                 </tbody>
               </table>
            </div>
