@@ -8,19 +8,34 @@ use Illuminate\Support\Facade;
 
 class Follow extends Model
 {
-    // フォロー削除
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+      'user_id', 'follow_id',
+    ];
+
+    /**
+     * フォロー削除
+     * @param $userId
+     * @param $followId
+     */
     public static function deleteFollowUser($userId, $followId) {
-      DB::table('follows')->where([
+      Follow::where([
         ['user_id', '=', $userId],
         ['follow_id', '=', $followId],
       ])->delete();
     }
 
-    // フォロー追加
-    public static function insertFollowUser($authId, $id) {
+    /**
+     * フォロー追加
+     * @param $userId
+     * @param $followId
+     */
+    public static function insertFollowUser($userId, $id) {
       $follow = new Follow;
-      $follow->user_id = $authId;
-      $follow->follow_id = $id;
-      $follow->save();
+      $follow->fill(['user_id' => $userId, 'follow_id' => $id])->save();
     }
 }
