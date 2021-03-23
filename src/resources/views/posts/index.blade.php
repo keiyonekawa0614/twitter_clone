@@ -46,7 +46,7 @@ if (!empty($postdata)) {
                           <img src="{{ asset('image/default_icon.png') }}" class="media-photo">
                         </a>
                         <div class="media-body">
-                          <a style="text-decoration: none;color: black;" href="#" data-toggle="modal" data-target="#detailModal" data-whatever="{{ $post->user->name }},{{ $post->created_at }},{{ $post->body }}">
+                          <a style="text-decoration: none;color: black;" href="#" data-toggle="modal" data-target="#detailModal" data-whatever="{{ $post->name }},{{ $post->created_at }},{{ $post->body }}">
                             {{-- start ツイート詳細ページ(ポップ画面表示) --}}
                             <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
                               <div class="modal-dialog">
@@ -83,7 +83,7 @@ if (!empty($postdata)) {
                             {{-- end ツイート詳細ページ(ポップ画面表示)--}}
                             <span style="float: right!important;" class="media-meta">{{ $post->created_at }}</span>
                             <h4 class="title">
-                              {{ $post->user->name }}
+                              {{ $post->name }}
                             </h4>
                             <p class="summary">{!! nl2br(e( $post->body )) !!}</p>
                           </a>
