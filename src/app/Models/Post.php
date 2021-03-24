@@ -13,15 +13,15 @@ class Post extends Model {
      * ユーザー投稿情報を取得
      */
     public static function searchPost($id) {
-      return DB::select('select distinct posts.id,posts.user_id,users.name,posts.body,posts.created_at from posts left outer join follows on posts.user_id = follows.follow_id inner join users on users.id = posts.user_id where follows.user_id = ? or posts.user_id = ? order by posts.created_at desc', [$id, $id]);
-
-      // TODO: 一旦query builderで戻し 要リファクタ
-      // return Post::with('user')
-      //       ->with(['follow' => function ($query) use ($id) {
-      //         $query->where('user_id', $id);
-      //       }])
-      //       ->orderBy('created_at', 'desc')
-      //       ->get();
+      return DB::table('posts')
+            ->distinct()
+            ->select('posts.id', 'posts.user_id', 'users.name', 'posts.body', 'posts.created_at')
+            ->join('users', 'users.id', '=', 'posts.user_id')
+            ->leftJoin('follows', 'follows.follow_id', '=', 'posts.user_id')
+            ->where('follows.user_id', $id)
+            ->orWhere('posts.user_id', $id)
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 
     /**
@@ -32,13 +32,5 @@ class Post extends Model {
       $post->body = $request->body;
       $post->user_id = Auth::id();
       $post->save();
-    }
-
-    public function user() {
-      return $this->belongsTo('App\Models\User', 'user_id');
-    }
-
-    public function follow() {
-      return $this->hasMany('App\Models\Follow', 'follow_id');
     }
 }
