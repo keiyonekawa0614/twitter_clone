@@ -1,5 +1,5 @@
 # Abstract
-- Laravel Framework 6.20.18
+- Laravel Framework 7.30.4
 - PHP 7.2.33
 
 
