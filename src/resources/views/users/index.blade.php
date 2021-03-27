@@ -1,8 +1,7 @@
 @php
-use App\Models\Follow;
-$title = __('Users');
+  $title = __('Users');
 @endphp
-@extends('layouts.my')
+@extends('layouts.app')
 @section('content')
 <div class="table-responsive">
   <div class="container">

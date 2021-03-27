@@ -6,7 +6,7 @@ if (!empty($postdata)) {
   $key = false;
 };
 @endphp
-@extends('layouts.my')
+@extends('layouts.app')
 @section('content')
 <div class="table-responsive">
   <div class="container" style="overflow: hidden;">

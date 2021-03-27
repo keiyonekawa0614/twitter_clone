@@ -1,7 +1,7 @@
 @php
     $title = __('Create User');
 @endphp
-@extends('layouts.my')
+@extends('layouts.app')
 @section('content')
 <h1>{{ $title }}</h1>
 <form action="{{ url('users') }}" method="post">

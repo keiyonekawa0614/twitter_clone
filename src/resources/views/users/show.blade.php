@@ -1,12 +1,8 @@
 @php
-use App\Models\Follow;
-$title = __('User') . ': ' . $user->name;
-$userName = Auth::user()->name;
-$name = $user->name;
+  $title = __('Users');
 @endphp
-@extends('layouts.my')
+@extends('layouts.app')
 @section('content')
-
 <div class="table-responsive">
   <div class="container" style="overflow: hidden;">
 	<div class="row">
