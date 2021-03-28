@@ -1,7 +1,7 @@
 @php
     $title = __('Register');
 @endphp
-@extends('layouts.my')
+@extends('layouts.app')
 @section('content')
 <div class="col-md-4 mx-auto">
     <h1>{{ $title }}</h1>
