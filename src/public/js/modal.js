@@ -17,7 +17,6 @@ window.onload = function(){
   $('#editModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
     var username = button.data('username')
-    console.log(username)
     var modal = $(this)
     modal.find('.form-control').val(username)
   });
