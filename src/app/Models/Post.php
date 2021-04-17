@@ -9,6 +9,15 @@ use Session;
 
 class Post extends Model {
 
+      /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+      'user_id', 'body',
+    ];
+
     /**
      * ユーザー投稿情報を取得
      */
@@ -26,11 +35,10 @@ class Post extends Model {
 
     /**
      * ツイート登録
+     * @param string $body
      */
-    public static function insertPost($request) {
+    public static function insertPost($body) {
       $post = new Post;
-      $post->body = $request->body;
-      $post->user_id = Auth::id();
-      $post->save();
+      $post->fill(['user_id' => Auth::id(), 'body' => $body])->save();
     }
 }

@@ -40,7 +40,7 @@ class PostController extends Controller
      */
     public function store(Request $request){
         // ツイート登録
-        Post::insertPost($request);
+        Post::insertPost($request->body);
         return redirect('/posts')->withInput();
     }
 }
