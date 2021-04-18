@@ -39,8 +39,7 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        // ツイート登録
-        Post::insertPost($request->body);
+        Post::insertPost(Auth::id(), $request->body);
         return redirect('/posts')->withInput();
     }
 }

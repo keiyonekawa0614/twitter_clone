@@ -34,8 +34,8 @@ class Follow extends Model
      * @param $userId
      * @param $followId
      */
-    public static function insertFollowUser($userId, $id) {
+    public static function insertFollowUser($userId, $followId) {
       $follow = new Follow;
-      $follow->fill(['user_id' => $userId, 'follow_id' => $id])->save();
+      $follow->fill(['user_id' => $userId, 'follow_id' => $followId])->save();
     }
 }

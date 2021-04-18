@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 use Session;
 
 class Post extends Model {
@@ -35,10 +34,11 @@ class Post extends Model {
 
     /**
      * ツイート登録
+     * @param int $userId
      * @param string $body
      */
-    public static function insertPost($body) {
+    public static function insertPost($userId, $body) {
       $post = new Post;
-      $post->fill(['user_id' => Auth::id(), 'body' => $body])->save();
+      $post->fill(['user_id' => $userId, 'body' => $body])->save();
     }
 }
