@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -48,9 +47,14 @@ class User extends Authenticatable
             ->first();
     }
 
-    // フォローidを配列で取得
-    public static function searchArrayFollowId() {
-      $follow_id = Follow::where('user_id','=', Auth::id())->get(['follow_id']);
+    /**
+     * フォローidを配列で取得する
+     *
+     * @param int $userId
+     * @return array フォローidの配列
+     */
+    public static function searchArrayFollowId($userId) {
+      $follow_id = Follow::where('user_id','=', $userId)->get(['follow_id']);
       return array_column($follow_id->toArray(), 'follow_id');
     }
 
@@ -62,16 +66,10 @@ class User extends Authenticatable
       return $user->fill($request->all())->save();
     }
 
-    /**
-     * follow relation
-     */
     public function follow() {
       return $this->hasMany('App\Models\Follow', 'user_id');
     }
 
-    /**
-     * follower relation
-     */
     public function follower() {
       return $this->hasMany('App\Models\Follow', 'follow_id');
     }

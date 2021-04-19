@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function index() {
       $user = User::findAll();
-      $array_follow_id = User::searchArrayFollowId();
+      $array_follow_id = User::searchArrayFollowId(Auth::id());
       return view('users.index', [
         'users' => $user,
         'array_follow_id' => $array_follow_id
