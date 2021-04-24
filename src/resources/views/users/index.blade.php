@@ -24,15 +24,12 @@
                             <h4 class="title">
                               <a href="{{ url('users/'.$user->id) }}">{{ $user->name }}</a>
                             </h4>
-                            {{-- start フォロー・フォロワーのカウント表示 --}}
                             <h4 class="title">
                               {{$user->follow_count}}<span class="pagado">フォロー</span>
                               {{$user->follower_count}}<span class="pagado">フォロワー</span>
                             </h4>
-                            {{-- end フォロー・フォロワーのカウント表示 --}}
                           </div>
                         </div>
-                        {{-- start フォローする・フォロー解除ボタン切り替え --}}
                         @if(Auth::user()->name != $user->name)
                           @if(in_array($user->id, $array_follow_id))
                             <span>
@@ -49,16 +46,15 @@
                           @endif
                         @endif
                       </div>
-                      {{-- end フォローする・フォロー解除ボタン切り替え --}}
                     </td>
                   </tr>
                   @endforeach
                 </tbody>
               </table>
-           </div>
-         </div>
-       </div>
-     </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

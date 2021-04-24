@@ -31,7 +31,7 @@ class UserController extends Controller
     /**
      * ユーザー詳細ページ表示
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
